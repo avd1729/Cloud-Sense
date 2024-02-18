@@ -3,88 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cloudburst Prediction</title>
+    <title>Cloud Sense: CloudBurst Prediction ⛈️</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
 
-        .container {
-            background-color: #fff;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
-            width: 100%;
-            text-align: center;
-        }
+.container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
 
-        h1 {
-            color: #333;
-            margin-bottom: 20px;
-        }
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
 
-        input[type="text"] {
-            width: 80%;
-            padding: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
+p {
+    color: #666;
+    margin-bottom: 10px;
+}
 
-        button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 80%;
-            margin-bottom: 20px;
-            transition: background-color 0.3s ease;
-        }
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
-        button:hover {
-            background-color: #45a049;
-        }
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
 
-        #result {
-            margin-top: 20px;
-            font-weight: bold;
-            text-align: center;
-        }
+input[type="text"] {
+    width: 250px;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
 
-        img {
-            max-width: 100%;
-            height: auto;
-        }
+input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+.result {
+    font-weight: bold;
+    color: #1e88e5;
+    margin-top: 20px;
+}
+
     </style>
 </head>
 <body>
     <div class="container">
-        <img src= "{{url_for('static',file_name='static\pexels-felix-mittermeier-531318.jpg')}}" alt="Cloud" width="100">
-        <h1>CloudSense: Predictive Cloudburst Analysis</h1>
-        <input type="text" id="locationInput" placeholder="Enter location...">
-        <button onclick="predictCloudburst()">Predict</button>
-        <div id="result"></div>
+        <img src="{{ url_for('static', filename='pexels-felix-mittermeier-531318.jpg') }}" alt="Cloud Image" width="200">
+        <h1>Cloud Sense : CloudBurst prediction ⛈️</h1>
+        <form action="/" method="post">
+            <label for="city">Enter city name:</label><br>
+            <input type="text" id="city" name="city"><br><br>
+            <input type="submit" value="Predict">
+        </form>
+        {% if invalid_input %}
+            <p style="color: red;">Invalid city name. Please try again.</p>
+        {% endif %}
+        {% if city %}
+            <p>City: {{ city }}</p> <!-- Display city name if it exists -->
+        {% endif %}
+        {% if prediction is not none %}
+            <p class="result">Chances of a CloudBurst in {{ city }}: {{ prediction }} %</p>
+        {% endif %}
     </div>
-
-    <script>
-        function predictCloudburst() {
-            var location = document.getElementById("locationInput").value;
-            // Here you can implement your cloudburst prediction algorithm
-            // For demonstration purposes, let's assume it's random
-            var prediction = Math.random() > 0.5 ? "likely" : "unlikely";
-            document.getElementById("result").innerText = "Cloudburst is " + prediction + " in " + location + ".";
-        }
-    </script>
 </body>
 </html>
+
+
+
