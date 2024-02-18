@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloudburst Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 80%;
+            margin-bottom: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src= "{{url_for('static',file_name='static\pexels-felix-mittermeier-531318.jpg')}}" alt="Cloud" width="100">
+        <h1>CloudSense: Predictive Cloudburst Analysis</h1>
+        <input type="text" id="locationInput" placeholder="Enter location...">
+        <button onclick="predictCloudburst()">Predict</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function predictCloudburst() {
+            var location = document.getElementById("locationInput").value;
+            // Here you can implement your cloudburst prediction algorithm
+            // For demonstration purposes, let's assume it's random
+            var prediction = Math.random() > 0.5 ? "likely" : "unlikely";
+            document.getElementById("result").innerText = "Cloudburst is " + prediction + " in " + location + ".";
+        }
+    </script>
+</body>
+</html>
